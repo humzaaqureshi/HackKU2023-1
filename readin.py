@@ -1,13 +1,13 @@
-"Humza Qureshi"
+"Yaeesh Mukadam"
 from PIL import Image
 from pytesseract import pytesseract
+from readreceipt import ConvertImage
 
 class READIN:
-    def __init__(self, filename):
-        self.filename = filename 
-        self.img = Image.open(self.filename)
-        self.text = pytesseract.image_to_string(self.img)
-        self.itemized_information = self.text.split()
+    def __init__(self):
+        self.receipt_text = ConvertImage("walmartreceipt.jpg")
+        self.receipt = self.receipt_text.return_text()
+        self.itemized_information = self.receipt.split()
 
 
     def all_information(self):
@@ -17,15 +17,13 @@ class READIN:
         print(self.itemized_information)
 
     def findtotal(self):
-        count = 0
-        for word in self.itemized_information:
-            if word.lower() == "the":
-                count = count + 1
-
-        return count
-
-demo = READIN("testpic.png")
-print(demo.findtotal())
+        index = self.itemized_information.index("TOTAL")
+        try:
+            total = float(self.itemized_information[index + 1])
+            print(total)
+        except ValueError:
+            self.itemized_information.pop(index)
+            self.findtotal()
 
 
 
