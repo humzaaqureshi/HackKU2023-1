@@ -1,7 +1,11 @@
 import pytesseract
 import cv2
 
+class ConvertImage:
+    def __init__(self,image):
+        self.image = image
 
-img = cv2.imread("walmartreceipt.jpg")
-text = pytesseract.image_to_string(img)
-print(text)
+    def return_text(self):
+        img = cv2.imread(self.image)
+        text = pytesseract.image_to_string(img)
+        return text
