@@ -1,4 +1,4 @@
-"Yaeesh Mukadam and Humza Q"
+"Humza Qureshi and yaeesh mukadam"
 from PIL import Image
 from pytesseract import pytesseract
 from readreceipt import ConvertImage
